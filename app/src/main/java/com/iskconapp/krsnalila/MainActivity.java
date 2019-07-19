@@ -3,8 +3,14 @@ package com.iskconapp.krsnalila;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -14,6 +20,8 @@ import com.mikepenz.materialdrawer.model.ExpandableDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+
+import java.lang.ref.Reference;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -28,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference reference = storage.getReferenceFromUrl("gs://krishna-lila.appspot.com/")
+                                    .child("download.jpg");
+        final ImageView iv = findViewById(R.id.iv1);
+        reference.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                iv.setImageBitmap(bitmap);
+            }
+        });
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem home = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withLevel(1).withIcon(R.drawable.home);

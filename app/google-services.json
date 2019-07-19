@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "243934582388",
+    "firebase_url": "https://krishna-lila.firebaseio.com",
+    "project_id": "krishna-lila",
+    "storage_bucket": "krishna-lila.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243934582388:android:911f1fe4521ad623",
+        "android_client_info": {
+          "package_name": "com.iskconapp.krsnalila"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243934582388-5g7ejgi4r4chov5ucsqnhatn7qv1epn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa_gSGjiUAVD-vlVTOKr_r1sk5a-f1PDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243934582388-5g7ejgi4r4chov5ucsqnhatn7qv1epn3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
