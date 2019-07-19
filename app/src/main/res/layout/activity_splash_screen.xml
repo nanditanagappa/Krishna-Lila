@@ -5,13 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
-    android:background="@color/md_black_1000">
+    android:background="@color/md_deep_orange_500">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:id="@+id/splashscreen"
         android:src="@drawable/iskcon_logo_white"
-        android:layout_centerInParent="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         />
     <TextView
         android:layout_width="match_parent"
@@ -20,9 +27,10 @@
         android:textColor="#fff"
         android:text="@string/app_name"
         android:layout_below="@+id/splashscreen"
-        android:layout_centerInParent="true"
+
         android:textSize="35dp"
         android:gravity="center"
         android:textStyle="italic"
         />
+    </RelativeLayout>
 </RelativeLayout>
