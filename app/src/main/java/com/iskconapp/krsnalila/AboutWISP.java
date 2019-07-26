@@ -1,15 +1,17 @@
 package com.iskconapp.krsnalila;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ImageView;
+
+import androidx.appcompat.widget.Toolbar;
+
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -19,36 +21,22 @@ import com.mikepenz.materialdrawer.model.ExpandableDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import me.relex.circleindicator.CircleIndicator;
+public class AboutWISP extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private ViewPager viewPager;
-    ViewPagerAdapter adapter;
+    private YouTubePlayerView playerView;
+    private String API_KEY = "AIzaSyA4Y5aFIRo9mPWHSdBeyJkmrokNXhrCS40";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_aboutwisp);
 
-
-        viewPager = findViewById(R.id.vp1);
         toolbar = findViewById(R.id.tb1);
+        playerView = findViewById(R.id.youTube);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference reference = storage.getReferenceFromUrl("gs://krishna-lila.appspot.com/")
-                .child("download.jpg");
-        adapter = new ViewPagerAdapter(getApplicationContext());
-        viewPager.setAdapter(adapter);
-        CircleIndicator indicator = findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(2);
-
+        playerView.initialize(API_KEY, this);
 
         PrimaryDrawerItem home = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withLevel(1).withIcon(R.drawable.home);
         SecondaryDrawerItem biography = new SecondaryDrawerItem().withIdentifier(2).withName("Biography").withLevel(2);
@@ -100,25 +88,19 @@ public class MainActivity extends AppCompatActivity {
                         new ExpandableDrawerItem().withName("Support Us").withIcon(R.drawable.support)
                                 .withSubItems(donate, feedback).withIdentifier(21)
 
-                )
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        switch (position) {
-                            case 3:
-                            //wisp
-                                Intent wisp = new Intent(MainActivity.this, AboutWISP.class);
-                                startActivity(wisp);
-                                break;
-                        }
-                        return true;
-                    }
-                })
-                .build();
+                ).build();
         result.getExpandableExtension().withOnlyOneExpandedItem(true);
-
 
     }
 
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        youTubePlayer.loadVideo("4uU0D3HhEOo");
+        youTubePlayer.play();
+    }
 
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+    }
 }

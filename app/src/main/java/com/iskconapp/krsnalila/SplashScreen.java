@@ -8,7 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class SplashScreen extends AppCompatActivity {
-    int timer = 5;
+    int timer = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

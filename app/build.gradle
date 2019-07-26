@@ -10,6 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -35,9 +37,19 @@ dependencies {
     implementation 'com.mikepenz:materialdrawer:6.0.8@aar'
     implementation 'com.mikepenz:fastadapter:3.2.6'
     implementation 'com.mikepenz:fastadapter-extensions-expandable:3.2.6'
-    implementation 'com.mikepenz:fastadapter-extensions:1.4.2@aar'
+    implementation 'com.android.support:multidex:1.0.3'
 
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    implementation 'com.mikepenz:fastadapter-extensions:1.4.2@aar'
+    implementation 'me.relex:circleindicator:1.2.2'
+    compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
+        exclude module: 'support-v4'
+    }
+    compile 'com.google.apis:google-api-services-youtube:v3-rev181-1.22.0'
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
+
+
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 //    implementation 'com.github.antonyt:InfiniteViewPager:v1.0.0'
 }
 apply plugin: 'com.google.gms.google-services'
