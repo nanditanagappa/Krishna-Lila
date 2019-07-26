@@ -1,14 +1,11 @@
 package com.iskconapp.krsnalila;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.widget.ImageView;
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -21,16 +18,18 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 
-import java.lang.ref.Reference;
-
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
+    private ViewPager viewPager;
+    ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        viewPager = findViewById(R.id.vp1);
         toolbar = findViewById(R.id.tb1);
 
         setSupportActionBar(toolbar);
@@ -38,23 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference reference = storage.getReferenceFromUrl("gs://krishna-lila.appspot.com/")
-                                    .child("download.jpg");
-        final ImageView iv = findViewById(R.id.iv1);
-        reference.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                iv.setImageBitmap(bitmap);
-            }
-        });
+                .child("download.jpg");
+        adapter = new ViewPagerAdapter(getApplicationContext());
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(2);
 
-        //if you want to update the items at a later time it is recommended to keep it in a variable
+
         PrimaryDrawerItem home = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withLevel(1).withIcon(R.drawable.home);
-       // PrimaryDrawerItem about = new PrimaryDrawerItem().withIdentifier(1).withName("About");
-        //PrimaryDrawerItem gallery = new PrimaryDrawerItem().withIdentifier(2).withName("Gallery");
-        //PrimaryDrawerItem archives = new PrimaryDrawerItem().withIdentifier(3).withName("Archives");
-//        SecondaryDrawerItem settings = (SecondaryDrawerItem) new SecondaryDrawerItem().withIdentifier(4).withName("Settings");
-//        SecondaryDrawerItem supportUs = (SecondaryDrawerItem) new SecondaryDrawerItem().withIdentifier(5).withName("Support Us");
         SecondaryDrawerItem biography = new SecondaryDrawerItem().withIdentifier(2).withName("Biography").withLevel(2);
         SecondaryDrawerItem wisp = new SecondaryDrawerItem().withIdentifier(3).withName("Who is Srila Prabhupadalila").withLevel(2);
         SecondaryDrawerItem analogies = new SecondaryDrawerItem().withIdentifier(4).withName("Prabhupada Analogies").withLevel(2);
@@ -83,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 )
                 .withSelectionListEnabledForSingleProfile(false).build();
 
-                //create the drawer and remember the `Drawer` result object
+        //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
                 .withAccountHeader(header)
@@ -94,15 +83,15 @@ public class MainActivity extends AppCompatActivity {
                 .addDrawerItems(
                         home,
                         new ExpandableDrawerItem().withName("About").withIcon(R.drawable.about)
-                        .withSubItems(wisp,biography,analogies,predictions,acknowledgement).withIdentifier(18),
+                                .withSubItems(wisp, biography, analogies, predictions, acknowledgement).withIdentifier(18),
 
                         new ExpandableDrawerItem().withName("Gallery").withIcon(R.drawable.gallery)
-                                .withSubItems(rarePictures,videos,quotes,memories).withIdentifier(19),
+                                .withSubItems(rarePictures, videos, quotes, memories).withIdentifier(19),
                         new ExpandableDrawerItem().withName("Archives").withIcon(R.drawable.archive)
-                                .withSubItems(voc,qf,temples,pfp,pbp).withIdentifier(20),
+                                .withSubItems(voc, qf, temples, pfp, pbp).withIdentifier(20),
                         new DividerDrawerItem(),
                         new ExpandableDrawerItem().withName("Support Us").withIcon(R.drawable.support)
-                                .withSubItems(donate,feedback).withIdentifier(21)
+                                .withSubItems(donate, feedback).withIdentifier(21)
 
                 ).build();
         result.getExpandableExtension().withOnlyOneExpandedItem(true);
