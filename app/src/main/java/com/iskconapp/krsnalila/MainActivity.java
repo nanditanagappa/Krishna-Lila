@@ -105,10 +105,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         switch (position) {
+                            case 1:
+                                break;
                             case 3:
                             //wisp
                                 Intent wisp = new Intent(MainActivity.this, AboutWISP.class);
                                 startActivity(wisp);
+                                break;
+                            case 4:
+                                //bio
+                                Intent bio = new Intent(MainActivity.this, Biography.class);
+                                startActivity(bio);
+                                finish();
                                 break;
                         }
                         return true;

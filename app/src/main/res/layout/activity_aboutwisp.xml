@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_margin="5sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb1"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/youTube"
-        android:layout_below="@+id/tb1"
-        android:layout_width="match_parent"
-        android:layout_height="250dp">
-    </com.google.android.youtube.player.YouTubePlayerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_below="@+id/youTube"
-        android:layout_marginTop="5dp"
-        android:text="Who is Srila Prabhupada"
-        android:textStyle="bold"
-        android:id="@+id/titleAboutWISP"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youTube"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@+id/tb1"
+            android:layout_margin="5sp"></com.google.android.youtube.player.YouTubePlayerView>
 
-    <TextView
-        android:text="@string/wispContent"
-        android:layout_below="@+id/titleAboutWISP"
-        android:id="@+id/wispContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/titleAboutWISP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/youTube"
+            android:layout_margin="5sp"
+            android:layout_marginTop="5dp"
+            android:text="Who is Srila Prabhupada"
+            android:textStyle="bold" />
 
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleAboutWISP">
+
+            <TextView
+                android:id="@+id/wispContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleAboutWISP"
+                android:layout_margin="5sp"
+                android:text="@string/wispContent" />
+        </ScrollView>
 
     </RelativeLayout>
-</ScrollView>
+</RelativeLayout>

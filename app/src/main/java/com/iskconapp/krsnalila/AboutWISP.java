@@ -1,6 +1,8 @@
 package com.iskconapp.krsnalila;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -21,6 +23,7 @@ import com.mikepenz.materialdrawer.model.ExpandableDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 public class AboutWISP extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
@@ -88,7 +91,33 @@ public class AboutWISP extends YouTubeBaseActivity implements YouTubePlayer.OnIn
                         new ExpandableDrawerItem().withName("Support Us").withIcon(R.drawable.support)
                                 .withSubItems(donate, feedback).withIdentifier(21)
 
-                ).build();
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch(position) {
+                            case 1:
+                                //HOME
+                                Intent intent = new Intent(AboutWISP.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                                break;
+
+                            case 3:
+                                break;
+                            case 4:
+                                //bio
+                                Intent bio = new Intent(AboutWISP.this, Biography.class);
+                                startActivity(bio);
+                                finish();
+                                break;
+
+
+                        }
+                        return true;
+                    }
+                })
+                .build();
         result.getExpandableExtension().withOnlyOneExpandedItem(true);
 
     }
